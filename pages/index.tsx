@@ -3,7 +3,7 @@ import { useState } from "react"
 function Home() {
     return (
         <div>
-            <h1>GetRichAPI</h1>
+            <h1>GetRichAPI em Teste</h1>
             <Contador/>
         </div>
     )
