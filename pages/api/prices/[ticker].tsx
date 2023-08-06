@@ -2,10 +2,12 @@
 import axios from 'axios';
 import { useRouter } from 'next/router';
 
+// RETORNA PREÇO DA AÇÃO 
+
 export default async (req, res) => {
     
     const { ticker }  = req.query
-    
+
   try {
     const response = await axios.get(`https://query1.finance.yahoo.com/v8/finance/chart/${ticker}.SA`);
 
