@@ -1,66 +1,61 @@
-
 import axios from 'axios';
 import cheerio, { load } from 'cheerio';
 
-
-// RETORNA DIVIDENDOS DA AÇÃO 
+// RETORNA DIVIDENDOS DA AÇÃO
 
 export default async (req, res) => {
-    
-    const { ticker }  = req.query
+  const { ticker } = req.query;
 
   try {
-    const response = await axios.get(`http://dividendobr.com/lib/search.php?q=${ticker}`);
+    const response = await axios.get(
+      `http://dividendobr.com/lib/search.php?q=${ticker}`
+    );
 
-    const $ = load(response.data)
+    const $ = load(response.data);
 
-    const scrapedData = []
+    const scrapedData = [];
 
     $('small').each((index, element) => {
+      const text = $(element).text();
 
-        const text =  $(element).text()
+      const type_regex = /(jscp)|(dividendos)/;
+      const date_regex = /(\d{4}-\d{2}-\d{2})/g;
+      const ticker_regex = /(\(\w+\))/g;
+      const provent_regex = /(\d,\d+)/g;
 
-        const type_regex = /(jscp)|(dividendos)/
-        const date_regex = /(\d{4}-\d{2}-\d{2})/g
-        const ticker_regex = /(\(\w+\))/g
-        const provent_regex = /(\d,\d+)/g
+      const values = {};
 
-        const values = {}
+      const ticker = text.match(ticker_regex);
+      const provent = text.match(provent_regex);
 
-        const ticker = text.match(ticker_regex)
-        const provent = text.match(provent_regex)
+      //console.log(text)
 
-        
-        //console.log(text)
+      for (let index = 0; index < ticker.length; index++) {
+        const no_parenthesis = (ticker[index] ?? 'ação').replace(/\(|\)/g, '');
 
-        for (let index = 0; index < ticker.length; index++) {
-            const no_parenthesis =  (ticker[index] ?? 'ação').replace(/\(|\)/g, "")
-
-            if (provent != null)  {
-
-                values[no_parenthesis] = parseFloat((provent[index] ?? '0.00').replace(/(\,)/g, ".")) 
-            }
-            else {
-                values[no_parenthesis] = 0
-            }
+        if (provent != null) {
+          values[no_parenthesis] = parseFloat(
+            (provent[index] ?? '0.00').replace(/(\,)/g, '.')
+          );
+        } else {
+          values[no_parenthesis] = 0;
         }
+      }
 
-        const event = {
-            //'text':text,
-            'type':text.match(type_regex)[0],
-            
-            'approval-date': text.match(date_regex)[0],
-            'payment-date': text.match(date_regex)[1],
-            'ex-date': text.match(date_regex)[2],
-            'value':  values
-        }
+      const event = {
+        //'text':text,
+        type: text.match(type_regex)[0],
 
-        scrapedData.push(event);
-    })
+        'approval-date': text.match(date_regex)[0],
+        'payment-date': text.match(date_regex)[1],
+        'ex-date': text.match(date_regex)[2],
+        value: values,
+      };
 
+      scrapedData.push(event);
+    });
 
     res.status(200).json(scrapedData);
-
   } catch (error) {
     console.error('Error fetching external data:', error);
     res.status(500).json({ error: 'Failed to fetch external data' });
