@@ -18,12 +18,8 @@ export default function Navbar({ mobileMenuOpen, setMobileMenuOpen }) {
       >
         <div className="flex lg:flex-1">
           <a href="/" className="-m-1.5 p-1.5">
-            <span className="sr-only">Fin&API</span>
-            <img
-              className="h-8 w-auto"
-              src="https://tailwindui.com/img/logos/mark.svg?color=green&shade=600"
-              alt=""
-            />
+            <span className="sr-only">InvistAPI</span>
+            <img className="h-8 w-auto" src="/images/logo.png" alt="logo" />
           </a>
         </div>
         <div className="flex lg:hidden">
@@ -32,7 +28,7 @@ export default function Navbar({ mobileMenuOpen, setMobileMenuOpen }) {
             className="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-gray-700"
             onClick={() => setMobileMenuOpen(true)}
           >
-            <span className="sr-only">Open main menu</span>
+            <span className="sr-only">Abrir</span>
             <Bars3Icon className="h-6 w-6" aria-hidden="true" />
           </button>
         </div>
@@ -59,12 +55,8 @@ export default function Navbar({ mobileMenuOpen, setMobileMenuOpen }) {
         <Dialog.Panel className="fixed inset-y-0 right-0 z-50 w-full overflow-y-auto bg-white px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
           <div className="flex items-center justify-between">
             <a href="#" className="-m-1.5 p-1.5">
-              <span className="sr-only">Fin&API</span>
-              <img
-                className="h-8 w-auto"
-                src="https://tailwindui.com/img/logos/mark.svg?color=green&shade=600"
-                alt=""
-              />
+              <span className="sr-only">InvistAPI</span>
+              <img className="h-8 w-auto" src="/images/logo.png" alt="logo" />
             </a>
             <button
               type="button"
