@@ -14,8 +14,9 @@ export default async (req, res) => {
     const start_tmsp = isNaN(new Date(start).getTime() ) ? new Date().getTime()/1000 : new Date(start).getTime()/1000
     const end_tmsp = isNaN(new Date(end).getTime() ) ? new Date().getTime()/1000 : new Date(end).getTime()/1000
 
+    console.log(typeof(end_tmsp))
   try {
-    const response = await axios.get(`https://query1.finance.yahoo.com/v7/finance/download/${ticker}.SA?period1=${parseInt(start_tmsp)}&period2=${parseInt(end_tmsp)}&interval=1d&events=history`);
+    const response = await axios.get(`https://query1.finance.yahoo.com/v7/finance/download/${ticker}.SA?period1=${start_tmsp | 0}&period2=${end_tmsp | 0}&interval=1d&events=history`);
 
     const data = response.data
     
