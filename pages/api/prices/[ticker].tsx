@@ -2,7 +2,8 @@
 import axios from 'axios';
 import { useRouter } from 'next/router';
 
-// RETORNA PREÇO DA AÇÃO 
+
+
 
 export default async (req, res) => {
     
