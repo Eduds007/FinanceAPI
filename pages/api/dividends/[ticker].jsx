@@ -3,6 +3,48 @@ import cheerio, { load } from 'cheerio';
 
 // RETORNA DIVIDENDOS DA AÇÃO
 
+/** 
+ * @swagger
+{
+    "/api/dividends/{ticker}": {
+        "get": {
+            "summary": "Retorna dividendos por ação",
+          "tags": [
+            "Indices Macroeconômicos"
+          ],
+            "parameters": [
+                {
+                    "name": "ticker",
+                    "in": "path",
+                    "description": "ticker da empresa listada",
+                    "required": true,
+                    "type": "string"
+                }
+            ],
+            "responses": {
+                "200": {
+                    "description": "Successful response",
+                    "content": {
+                        "application/json": {
+                            "example": {
+                                "type": "jscp",
+                                "approval-date": "2022-05-09",
+                                "payment-date": "2022-07-01",
+                                "ex-date": "2022-06-01",
+                                "value": {
+                                    "ITSA3": 0.0235295,
+                                    "ITSA4": 0.0235295
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+*/
+
 export default async (req, res) => {
   const { ticker } = req.query;
 
