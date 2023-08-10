@@ -14,11 +14,20 @@ function ApiDoc({ spec }: InferGetStaticPropsType<typeof getStaticProps>) {
 export const getStaticProps: GetStaticProps = async () => {
   const spec: Record<string, any> = createSwaggerSpec({
     definition: {
+      
       openapi: '3.0.0',
       info: {
-        title: 'Next Swagger API Example',
-        version: '1.0',
+        title: 'InvistAPI Docs',
+        description: "Documentação da InvistAPI",
+        version: '0.1',
+        termsOfService: "#",
+        contact: {
+          email:"eduardomilanezaraujo@gmail.com"
+        }
       },
+      host: "http://localhost:3000",
+      basePath:"/api",
+      
     },
   });
 
