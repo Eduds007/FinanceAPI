@@ -2,7 +2,47 @@
 import axios from 'axios';
 import { useRouter } from 'next/router';
 
-// RETORNA PREÇO DA AÇÃO 
+/**
+ * @swagger
+{
+    "/api/prices/{ticker}": {
+        "get": {
+            "summary": "Retornao preço da empresa listada",
+          "tags": [
+          "Indices Macroeconômicos"
+          ],
+            "parameters": [
+                {
+                    "name": "ticker",
+                    "in": "path",
+                    "description": "ticker da empresa listada",
+                    "required": true,
+                    "type": "string",
+                    
+                    }
+            ],
+            "responses": {
+                "200": {
+                    "description": "Successful response",
+                    "content": {
+                        "application/json": {
+                            "example": {
+                                
+                                    "currency": "BRL",
+                                    "symbol": "BBAS3.SA",
+                                    "price": 46.98,
+                                    "time": 1691689772143
+
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+*/
+
 
 export default async (req, res) => {
     

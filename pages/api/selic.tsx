@@ -3,6 +3,33 @@ import { useRouter } from 'next/router';
 
 // RETORNA SELIC
 
+/**
+ * @swagger
+{
+    "/api/selic": {
+      "get": {
+        "tags": [
+          "Indices Macroeconômicos"
+          ],
+        "summary": "Retorna a taxa selic",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "example": {
+                  "selic": 13.25,
+                  "start-date": "2023-08-03T03:00:00Z",
+                  "end-date": null
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+*/
 export default async (req, res) => {
     
     
